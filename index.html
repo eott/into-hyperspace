@@ -5,6 +5,11 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 	</head>
 	<body>
+		FC: <span id="framecounter">0</span>
+		Theta: <span id="theta">0</span>
+		X: <span id="posX">0</span>
+		Y: <span id="posY">0</span>
+		<br/>
 		<canvas id="screen" width="1000" height="700" style="border: 1px solid #222222">
 		
 		</canvas>
@@ -14,12 +19,15 @@
 		var ctx = can.getContext("2d");
 		var keepPlaying = true;
 		var keyStatus = {};
-		var speed = 4;
+		var speed = 10;
 		var startX = 400;
 		var startY = 300;
 		var posX = startX;
 		var posY = startY;
 		var poxZ = 0;
+		var fc = 0;
+		var theta = 0;
+		var r = 0;
 		var PI = Math.PI
 		var PI2 = PI / 2;
 		var PI32 = 3 * PI / 2;
@@ -69,17 +77,18 @@
 		function upkeep() {
 			ctx.clearRect(0, 0, can.width, can.height);
 			doMovement();
+			drawGUI();
 			drawPlayerAt(posX, posY);
 		}
 		
 		function doMovement() {
 			// This would be much easier with polar coordinates, but webdev has made go uuuuuhhhh at math
-			var r = Math.sqrt((startX-posX)*(startX-posX) + (startY-posY)*(startY-posY));
-			var distX = startX - posX;
-			var distY = startY - posY;
+			r = Math.sqrt((startX-posX)*(startX-posX) + (startY-posY)*(startY-posY));
+			var distX = posX - startX;
+			var distY = posY - startY;
+			theta = Math.atan2(distY, distX);
 			var dx = 0;
 			var dy = 0;
-			var phi = 0;
 			
 			if (r < 300) {
 				dx -= keyStatus[1] ? speed : 0;
@@ -88,7 +97,6 @@
 				dy += keyStatus[2] ? speed : 0;
 			} else {
 				r = 300;
-				theta = Math.atan2(distY, distX);
 				if (theta <= PI2) { // Upper right quadrant
 					theta += keyStatus[0] ? 0.1 : 0;
 					theta += keyStatus[1] ? 0.2 : 0;
@@ -123,6 +131,18 @@
 			
 			posX += dx;
 			posY += dy;
+		}
+		
+		function drawGUI() {
+			document.getElementById("framecounter").innerHTML = fc++;
+			document.getElementById("posX").innerHTML = posX;
+			document.getElementById("posY").innerHTML = posY;
+			document.getElementById("theta").innerHTML = theta;
+			ctx.beginPath();
+			ctx.arc(startX, startY, 300, 0, 2 * Math.PI, false);
+			ctx.lineWidth = 1;
+			ctx.strokeStyle = '#000000';
+			ctx.stroke();
 		}
 		
 		function drawPlayerAt(x, y) {
