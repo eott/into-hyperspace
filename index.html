@@ -78,7 +78,9 @@
 			ctx.clearRect(0, 0, can.width, can.height);
 			doMovement();
 			drawGUI();
+			drawTunnel();
 			drawPlayerAt(posX, posY);
+			fc++;
 		}
 		
 		function doMovement() {
@@ -101,7 +103,6 @@
 				dy -= keyStatus[0] ? speed : 0;
 				dy += keyStatus[2] ? speed : 0;
 			} else {
-				r = 300;
 				if (theta <= PI2) { // Upper right quadrant
 					dx -= keyStatus[1] ? speed : 0;
 					dy += keyStatus[2] ? speed : 0;
@@ -134,16 +135,28 @@
 			posY += dy;
 		}
 		
+		function drawTunnel() {
+			var rad = 840 + 15 * (fc % 24);
+			for (var i = 0; i < 30; i++) {
+				circle(startX, startY, rad, '#000000');
+				rad *= 0.7;
+			}
+		}
+		
+		function circle(x, y, radius, color) {
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+			ctx.lineWidth = 1;
+			ctx.strokeStyle = color;
+			ctx.stroke();
+		}
+		
 		function drawGUI() {
-			document.getElementById("framecounter").innerHTML = fc++;
+			document.getElementById("framecounter").innerHTML = fc;
 			document.getElementById("posX").innerHTML = posX;
 			document.getElementById("posY").innerHTML = posY;
 			document.getElementById("theta").innerHTML = theta;
-			ctx.beginPath();
-			ctx.arc(startX, startY, 300, 0, 2 * Math.PI, false);
-			ctx.lineWidth = 1;
-			ctx.strokeStyle = '#000000';
-			ctx.stroke();
+			circle(startX, startY, 300, '#FF0000');
 		}
 		
 		function drawPlayerAt(x, y) {
