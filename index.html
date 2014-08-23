@@ -62,6 +62,7 @@
 		}, false);
 		
 		function upkeep() {
+			ctx.clearRect(0, 0, can.width, can.height);
 			posX -= keyStatus[1] ? speed : 0;
 			posX += keyStatus[3] ? speed : 0;
 			posY -= keyStatus[0] ? speed : 0;
