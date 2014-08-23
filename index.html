@@ -82,13 +82,18 @@
 		}
 		
 		function doMovement() {
-			// This would be much easier with polar coordinates, but webdev has made go uuuuuhhhh at math
+			// This would be much easier with proper polar coordinates, but webdev has made me go uuuuuhhhh at math
 			r = Math.sqrt((startX-posX)*(startX-posX) + (startY-posY)*(startY-posY));
 			var distX = posX - startX;
 			var distY = posY - startY;
-			theta = Math.atan2(distY, distX);
 			var dx = 0;
 			var dy = 0;
+			
+			if (distY < 0) {
+				theta = -Math.atan2(distY, distX);
+			} else {
+				theta = PI + (PI - Math.atan2(distY, distX));
+			}
 			
 			if (r < 300) {
 				dx -= keyStatus[1] ? speed : 0;
@@ -98,30 +103,18 @@
 			} else {
 				r = 300;
 				if (theta <= PI2) { // Upper right quadrant
-					theta += keyStatus[0] ? 0.1 : 0;
-					theta += keyStatus[1] ? 0.2 : 0;
-					theta -= keyStatus[2] ? 0.2 : 0;
-					theta -= keyStatus[3] ? 0.1 : 0;
+					dx -= keyStatus[1] ? speed : 0;
+					dy += keyStatus[2] ? speed : 0;
 				} else if(theta <= PI) { // Upper left quadrant
-					theta -= keyStatus[0] ? 0.1 : 0;
-					theta += keyStatus[1] ? 0.1 : 0;
-					theta += keyStatus[2] ? 0.2 : 0;
-					theta -= keyStatus[3] ? 0.2 : 0;
+					dx += keyStatus[3] ? speed : 0;
+					dy += keyStatus[2] ? speed : 0;
 				} else if(theta <= PI32) { // Lower left quadrant
-					theta -= keyStatus[0] ? 0.2 : 0;
-					theta -= keyStatus[1] ? 0.1 : 0;
-					theta += keyStatus[2] ? 0.1 : 0;
-					theta += keyStatus[3] ? 0.2 : 0;
+					dx += keyStatus[3] ? speed : 0;
+					dy -= keyStatus[0] ? speed : 0;
 				} else { // Lower right quadrant
-					theta += keyStatus[0] ? 0.2 : 0;
-					theta -= keyStatus[1] ? 0.2 : 0;
-					theta -= keyStatus[2] ? 0.1 : 0;
-					theta += keyStatus[3] ? 0.1 : 0;
+					dx -= keyStatus[1] ? speed : 0;
+					dy -= keyStatus[0] ? speed : 0;
 				}
-				posX = Math.cos(theta) * r;
-				posY = Math.sin(theta) * r;
-				dx = dy = 0;
-				// x=cos(theta)*r y=sin(theta)*r, theta=atan2(y,x) r=math.sqrt(x*x+y*y);
 			}
 			
 			if (dx != 0 && dy != 0) {
