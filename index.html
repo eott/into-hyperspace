@@ -6,6 +6,7 @@
 	</head>
 	<body>
 		FC: <span id="framecounter">0</span>
+		HP :  <span id="hp">0</span>
 		Theta: <span id="theta">0</span>
 		X: <span id="posX">0</span>
 		Y: <span id="posY">0</span>
@@ -28,6 +29,7 @@
 		var posX = 0;
 		var posY = 0;
 		var posZ = 0;
+		var hp = 100;
 		var fc = 0;
 		var theta = 0;
 		var r = 0;
@@ -166,11 +168,17 @@
 			ctx.fillStyle = "#22FFFF";
 			for (var i = 0; i < mobs.length; i++) {
 				if (mobs[i]) {
-				var factor = (1 - (mobs[i][2] - posZ) / 1000);
-					if (factor > 0.95) {
+					var factor = (1 - (mobs[i][2] - posZ) / 1000);
+					var mobX = startX + mobs[i][0] * 840 * factor;
+					var mobY = startY + mobs[i][1] * 840 * factor;
+					var mobR = 100 * factor;
+					if (factor > 0.98) {
+						if (Math.sqrt((mobX - posX) * (mobX - posX) + (mobY - posY) * (mobY - posY)) <= mobR * 3) { // I have no idea why the hitbox is too small
+							hp -= 5;
+						}
 						mobs[i] = false;
 					} else {
-						circle(startX + mobs[i][0] * 840 * factor, startY + mobs[i][1] * 840 * factor, 100 * factor, "", 1, true);
+						circle(mobX, mobY, mobR, "", 1, true);
 					}
 				}
 			}
@@ -181,6 +189,7 @@
 			document.getElementById("posX").innerHTML = posX;
 			document.getElementById("posY").innerHTML = posY;
 			document.getElementById("theta").innerHTML = theta;
+			document.getElementById("hp").innerHTML = hp;
 			circle(startX, startY, colRad, '#FF0000', 1);
 		}
 		
