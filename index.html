@@ -10,7 +10,7 @@
 		X: <span id="posX">0</span>
 		Y: <span id="posY">0</span>
 		<br/>
-		<canvas id="screen" width="1000" height="700" style="border: 1px solid #222222">
+		<canvas id="screen" width="1000" height="800" style="border: 1px solid #222222">
 		
 		</canvas>
 	</body>
@@ -20,8 +20,8 @@
 		var keepPlaying = true;
 		var keyStatus = {};
 		var speed = 10;
-		var startX = 400;
-		var startY = 300;
+		var startX = 500;
+		var startY = 400;
 		var posX = startX;
 		var posY = startY;
 		var poxZ = 0;
@@ -97,7 +97,7 @@
 				theta = PI + (PI - Math.atan2(distY, distX));
 			}
 			
-			if (r < 300) {
+			if (r < 450) {
 				dx -= keyStatus[1] ? speed : 0;
 				dx += keyStatus[3] ? speed : 0;
 				dy -= keyStatus[0] ? speed : 0;
@@ -156,12 +156,12 @@
 			document.getElementById("posX").innerHTML = posX;
 			document.getElementById("posY").innerHTML = posY;
 			document.getElementById("theta").innerHTML = theta;
-			circle(startX, startY, 300, '#FF0000');
+			circle(startX, startY, 450, '#FF0000');
 		}
 		
 		function drawPlayerAt(x, y) {
 			ctx.fillStyle = "#222244";
-			ctx.fillRect(x, y, 70, 70);
+			ctx.fillRect(x - 50, y - 25, 100, 50);
 		}
 	</script>
 </html>

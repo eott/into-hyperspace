@@ -1,3 +1,7 @@
-canvas {
-	margin: auto auto;
+canvas[id=screen] {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -400px;
+	margin-left: -500px;
 }
