@@ -87,6 +87,9 @@
 			drawPlayerAt(posX + startX, posY + startY);
 			drawGUI();
 			fc++;
+			if (hp <= 0) {
+				window.clearInterval(mainLoop);
+			}
 		}
 		
 		function doMovement() {
@@ -173,7 +176,7 @@
 					var mobY = startY + mobs[i][1] * 840 * factor;
 					var mobR = 100 * factor;
 					if (factor > 0.98) {
-						if (Math.sqrt((mobX - posX) * (mobX - posX) + (mobY - posY) * (mobY - posY)) <= mobR * 3) { // I have no idea why the hitbox is too small
+						if (Math.sqrt((mobX - posX - startX) * (mobX - posX - startX) + (mobY - posY - startY) * (mobY - posY - startY)) <= mobR) {
 							hp -= 5;
 						}
 						mobs[i] = false;
