@@ -48,3 +48,9 @@ function doMovement() {
 	posY += dy;
 	posZ += zspeed;
 }
+
+function resetMovement() {
+	posX = 0;
+	posY = 0;
+	posZ = 0;
+}

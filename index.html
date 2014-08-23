@@ -7,7 +7,16 @@
 	
 	<body>
 		<div id="mapView">
-			<button id="startMap" onclick="init()">Start Game</button>
+			<div id="mapWrapper">
+				<div id="map">
+					
+				</div>
+				<div id="info">
+					<button id="startMap" onclick="initGame()">Start Game</button>
+					<br/>
+					<span id="status">You have not played yet.</span>
+				</div>
+			</div> <!-- mapWrapper -->
 		</div> <!-- mapView -->
 		
 		<div id="gameView" style="display: none;">
@@ -17,7 +26,7 @@
 			X: <span id="posX">0</span>
 			Y: <span id="posY">0</span>
 			<br/>
-			<canvas id="screen" width="1000" height="800" style="border: 1px solid #222222"></canvas>
+			<canvas id="screen" width="1000" height="800"></canvas>
 		</div> <!-- gameView-->
 	</body>
 	
@@ -31,8 +40,9 @@
 		var can = document.getElementById("screen");
 		var ctx = can.getContext("2d");
 		var keepPlaying = true;
-		var fc = 0;
 		var mainLoop = false;
+		var completed = false;
+		var fc = 0;
 		
 		// Player, enemies and environment
 		var mobs = [];
@@ -56,25 +66,51 @@
 		var PI2 = PI / 2;
 		var PI32 = 3 * PI / 2;
 		
-		function init(event) {
+		// Stuff that only needs to be done once
+		registerListeners();
+		
+		function initGame(event) {
 			var gameView = document.getElementById("gameView").style.display = "block";
 			var mapView = document.getElementById("mapView").style.display = "none";
 			
+			completed = false;
+			keepPlaying = true;
+			hp = 100;
+			fc = 0;
+			resetMobs();
+			resetMovement();
+			
 			mainLoop = window.setInterval("upkeep()", 30);
-			registerListeners();
 		}
 		
+		function initMap(event) {
+			var gameView = document.getElementById("gameView").style.display = "none";
+			var mapView = document.getElementById("mapView").style.display = "block";
+			document.getElementById("status").innerHTML = "You have " + (completed ? "won" : "lost") + " the last round.";
+		}
 		
 		function upkeep() {
+			fc++;
 			ctx.clearRect(0, 0, can.width, can.height);
+			
 			doMovement();
 			drawTunnel();
 			drawMobs();
 			drawPlayerAt(posX + startX, posY + startY);
 			drawGUI();
-			fc++;
+			
 			if (hp <= 0) {
+				keepPlaying = false;
+				completed = false;
+			}
+			if (fc > 2000) {
+				keepPlaying = false;
+				completed = true;
+			}
+			
+			if (!keepPlaying) {
 				window.clearInterval(mainLoop);
+				initMap();
 			}
 		}
 	</script>

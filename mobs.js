@@ -21,3 +21,7 @@ function drawMobs() {
 		}
 	}
 }
+
+function resetMobs() {
+	mobs = [];
+}

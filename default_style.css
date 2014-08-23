@@ -4,4 +4,30 @@ canvas[id=screen] {
 	left: 50%;
 	margin-top: -400px;
 	margin-left: -500px;
+	border: 1px solid #000000;
+}
+
+div[id=mapWrapper] {
+	width: 1000px;
+	height: 800px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -400px;
+	margin-left: -500px;
+	border: 1px solid #000000;
+}
+
+div[id=map] {
+	background-color: #333333;
+	float: left;
+	width: 75%;
+	height: 100%;
+}
+
+div[id=info] {
+	background-color: #666666;
+	float: left;
+	width: 25%;
+	height: 100%;
 }
