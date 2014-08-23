@@ -1,3 +1,7 @@
+body {
+	background-color: #AAAAAA;
+}
+
 canvas[id=screen] {
 	position: fixed;
 	top: 50%;
