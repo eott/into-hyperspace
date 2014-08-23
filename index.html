@@ -20,6 +20,9 @@
 		var posX = startX;
 		var posY = startY;
 		var poxZ = 0;
+		var PI = Math.PI
+		var PI2 = PI / 2;
+		var PI32 = 3 * PI / 2;
 		
 		var mainLoop = window.setInterval("upkeep()", 30);
 		
@@ -71,16 +74,47 @@
 		
 		function doMovement() {
 			// This would be much easier with polar coordinates, but webdev has made go uuuuuhhhh at math
-			var dist = Math.sqrt((startX-posX)*(startX-posX) + (startY-posY)*(startY-posY));
+			var r = Math.sqrt((startX-posX)*(startX-posX) + (startY-posY)*(startY-posY));
 			var distX = startX - posX;
 			var distY = startY - posY;
 			var dx = 0;
 			var dy = 0;
+			var phi = 0;
 			
-			dx -= keyStatus[1] ? speed : 0;
-			dx += keyStatus[3] ? speed : 0;
-			dy -= keyStatus[0] ? speed : 0;
-			dy += keyStatus[2] ? speed : 0;
+			if (r < 300) {
+				dx -= keyStatus[1] ? speed : 0;
+				dx += keyStatus[3] ? speed : 0;
+				dy -= keyStatus[0] ? speed : 0;
+				dy += keyStatus[2] ? speed : 0;
+			} else {
+				r = 300;
+				theta = Math.atan2(distY, distX);
+				if (theta <= PI2) { // Upper right quadrant
+					theta += keyStatus[0] ? 0.1 : 0;
+					theta += keyStatus[1] ? 0.2 : 0;
+					theta -= keyStatus[2] ? 0.2 : 0;
+					theta -= keyStatus[3] ? 0.1 : 0;
+				} else if(theta <= PI) { // Upper left quadrant
+					theta -= keyStatus[0] ? 0.1 : 0;
+					theta += keyStatus[1] ? 0.1 : 0;
+					theta += keyStatus[2] ? 0.2 : 0;
+					theta -= keyStatus[3] ? 0.2 : 0;
+				} else if(theta <= PI32) { // Lower left quadrant
+					theta -= keyStatus[0] ? 0.2 : 0;
+					theta -= keyStatus[1] ? 0.1 : 0;
+					theta += keyStatus[2] ? 0.1 : 0;
+					theta += keyStatus[3] ? 0.2 : 0;
+				} else { // Lower right quadrant
+					theta += keyStatus[0] ? 0.2 : 0;
+					theta -= keyStatus[1] ? 0.2 : 0;
+					theta -= keyStatus[2] ? 0.1 : 0;
+					theta += keyStatus[3] ? 0.1 : 0;
+				}
+				posX = Math.cos(theta) * r;
+				posY = Math.sin(theta) * r;
+				dx = dy = 0;
+				// x=cos(theta)*r y=sin(theta)*r, theta=atan2(y,x) r=math.sqrt(x*x+y*y);
+			}
 			
 			if (dx != 0 && dy != 0) {
 				dy *= 0.7071067811;
