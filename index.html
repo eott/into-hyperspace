@@ -4,10 +4,12 @@
 		<link rel="stylesheet" type="text/css" href="default_style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 	</head>
+	
 	<body>
 		<div id="mapView">
 			<button id="startMap" onclick="init()">Start Game</button>
 		</div> <!-- mapView -->
+		
 		<div id="gameView" style="display: none;">
 			FC: <span id="framecounter">0</span>
 			HP :  <span id="hp">0</span>
@@ -18,6 +20,12 @@
 			<canvas id="screen" width="1000" height="800" style="border: 1px solid #222222"></canvas>
 		</div> <!-- gameView-->
 	</body>
+	
+	<script src="input.js" type="text/javascript"></script>
+	<script src="gfx.js" type="text/javascript"></script>
+	<script src="mobs.js" type="text/javascript"></script>
+	<script src="movement.js" type="text/javascript"></script>
+	
 	<script type="text/javascript">
 		// Display and meta globals
 		var can = document.getElementById("screen");
@@ -53,46 +61,7 @@
 			var mapView = document.getElementById("mapView").style.display = "none";
 			
 			mainLoop = window.setInterval("upkeep()", 30);
-			
-			window.addEventListener("keydown", function(event) {
-				switch (event.keyCode) {
-					case 87: // w
-						keyStatus[0] = true;
-						break;
-					
-					case 65: // a
-						keyStatus[1] = true;
-						break;
-						
-					case 83: // s
-						keyStatus[2] = true;
-						break;
-						
-					case 68: // d
-						keyStatus[3] = true;
-						break;
-				}
-			}, false);
-			
-			window.addEventListener("keyup", function(event) {
-				switch (event.keyCode) {
-					case 87: // w
-						keyStatus[0] = false;
-						break;
-					
-					case 65: // a
-						keyStatus[1] = false;
-						break;
-						
-					case 83: // s
-						keyStatus[2] = false;
-						break;
-						
-					case 68: // d
-						keyStatus[3] = false;
-						break;
-				}
-			}, false);
+			registerListeners();
 		}
 		
 		
@@ -107,168 +76,6 @@
 			if (hp <= 0) {
 				window.clearInterval(mainLoop);
 			}
-		}
-		
-		function doMovement() {
-			// This would be much easier with proper polar coordinates, but webdev has made me go uuuuuhhhh at math
-			r = Math.sqrt(posX * posX + posY * posY);
-			var dx = 0;
-			var dy = 0;
-			
-			if (posY < 0) {
-				theta = -Math.atan2(posY, posX);
-			} else {
-				theta = PI + (PI - Math.atan2(posY, posX));
-			}
-			
-			if (r < colRad) {
-				dx -= keyStatus[1] ? speed : 0;
-				dx += keyStatus[3] ? speed : 0;
-				dy -= keyStatus[0] ? speed : 0;
-				dy += keyStatus[2] ? speed : 0;
-			} else {
-				if (theta <= PI2) { // Upper right quadrant
-					dx -= keyStatus[1] ? speed : 0;
-					dy += keyStatus[2] ? speed : 0;
-					dx -= keyStatus[0] ? speed * 0.1 : 0;
-					dy += keyStatus[3] ? speed * 0.1 : 0;
-				} else if(theta <= PI) { // Upper left quadrant
-					dx += keyStatus[3] ? speed : 0;
-					dy += keyStatus[2] ? speed : 0;
-					dx += keyStatus[0] ? speed * 0.1 : 0;
-					dy += keyStatus[1] ? speed * 0.1 : 0;
-				} else if(theta <= PI32) { // Lower left quadrant
-					dx += keyStatus[3] ? speed : 0;
-					dy -= keyStatus[0] ? speed : 0;
-					dy -= keyStatus[1] ? speed * 0.1 : 0;
-					dx += keyStatus[2] ? speed * 0.1 : 0;
-				} else { // Lower right quadrant
-					dx -= keyStatus[1] ? speed : 0;
-					dy -= keyStatus[0] ? speed : 0;
-					dx -= keyStatus[2] ? speed * 0.1 : 0;
-					dy -= keyStatus[3] ? speed * 0.1 : 0;
-				}
-			}
-			
-			if (dx != 0 && dy != 0) {
-				dy *= 0.7071067811;
-				dx *= 0.7071067811;
-			}
-			
-			posX += dx;
-			posY += dy;
-			posZ += zspeed;
-		}
-		
-		function drawTunnel() {
-			var rad = 840 + zspeed * (fc % 24);
-			for (var i = 0; i < 30; i++) {
-				circle(startX, startY, rad, '#000000', 1);
-				rad *= 0.7;
-			}
-		}
-		
-		function circle(x, y, radius, color, width, fill = false) {
-			ctx.beginPath();
-			ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
-			ctx.lineWidth = width;
-			ctx.strokeStyle = color;
-			if (fill) {
-				ctx.fill();
-			} else {
-				ctx.stroke();
-			}
-		}
-		
-		function drawMobs() {
-			if (Math.random() < 0.05) {
-				mobs[mobs.length] = [Math.random() * 2 - 1, Math.random() * 2 - 1, posZ + 1000];
-			}
-			
-			ctx.fillStyle = "#22FFFF";
-			for (var i = 0; i < mobs.length; i++) {
-				if (mobs[i]) {
-					var factor = (1 - (mobs[i][2] - posZ) / 1000);
-					var mobX = startX + mobs[i][0] * 840 * factor;
-					var mobY = startY + mobs[i][1] * 840 * factor;
-					var mobR = 100 * factor;
-					if (factor > 0.98) {
-						if (Math.sqrt((mobX - posX - startX) * (mobX - posX - startX) + (mobY - posY - startY) * (mobY - posY - startY)) <= mobR) {
-							hp -= 5;
-						}
-						mobs[i] = false;
-					} else {
-						circle(mobX, mobY, mobR, "", 1, true);
-					}
-				}
-			}
-		}
-		
-		function drawGUI() {
-			// Debug gui
-			document.getElementById("framecounter").innerHTML = fc;
-			document.getElementById("posX").innerHTML = posX;
-			document.getElementById("posY").innerHTML = posY;
-			document.getElementById("theta").innerHTML = theta;
-			document.getElementById("hp").innerHTML = hp;
-			circle(startX, startY, colRad, '#FF0000', 1);
-			
-			// HP bar
-			ctx.fillStyle = "#000000";
-			ctx.fillRect(200, 750, 600, 25, "#000000");
-			ctx.fillStyle = "#FFFF00";
-			ctx.fillRect(202, 752, 6 * hp - 4, 21, "#FFFF00");
-		}
-		
-		function drawPlayerAt(x, y) {
-			var paraX = posX / colRad;
-			var paraY = posY / colRad;
-			ctx.fillStyle = "#222244";
-			ctx.strokeStyle = "222244";
-			// Left wing
-			ctx.beginPath();
-			ctx.moveTo(x - 50, y - 25);
-			ctx.lineTo(x - 80 - (25 * paraX), y + 25);
-			ctx.lineTo(x - 50, y + 25);
-			ctx.closePath();
-			ctx.fill();
-			// Right wing
-			ctx.beginPath();
-			ctx.moveTo(x + 50, y - 25);
-			ctx.lineTo(x + 80 - (25 * paraX), y + 25);
-			ctx.lineTo(x + 50, y + 25);
-			ctx.closePath();
-			ctx.fill();
-			// Head up
-			ctx.beginPath();
-			ctx.moveTo(x - 50, y - 25);
-			ctx.lineTo(x - 40, y - 25 - (20 * paraY));
-			ctx.lineTo(x + 40, y - 25 - (20 * paraY));
-			ctx.lineTo(x + 50, y - 25);
-			ctx.closePath();
-			ctx.fill();
-			// Head down
-			ctx.beginPath();
-			ctx.moveTo(x - 50, y + 25);
-			ctx.lineTo(x - 40, y + 25 - (20 * paraY));
-			ctx.lineTo(x + 40, y + 25 - (20 * paraY));
-			ctx.lineTo(x + 50, y + 25);
-			ctx.closePath();
-			ctx.fill();
-			// Main body
-			ctx.fillStyle = "#444466";
-			ctx.fillRect(x - 50, y - 25, 100, 50);
-			// Thrusters
-			var grad = ctx.createRadialGradient(x - 25, y, 5, x - 25, y, 12);
-			grad.addColorStop(0, "#FFFFFF");
-			grad.addColorStop(1, "#FFFF00");
-			ctx.fillStyle = grad;
-			circle(x - 25, y, 12, "#FFFFFF", 2, true);
-			var grad = ctx.createRadialGradient(x + 25, y, 5, x + 25, y, 12);
-			grad.addColorStop(0, "#FFFFFF");
-			grad.addColorStop(1, "#FFFF00");
-			ctx.fillStyle = grad;
-			circle(x + 25, y, 12, "#FFFFFF", 2, true);
 		}
 	</script>
 </html>
