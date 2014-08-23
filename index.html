@@ -15,8 +15,10 @@
 		var keepPlaying = true;
 		var keyStatus = {};
 		var speed = 4;
-		var posX = 100;
-		var posY = 100;
+		var startX = 400;
+		var startY = 300;
+		var posX = startX;
+		var posY = startY;
 		var poxZ = 0;
 		
 		var mainLoop = window.setInterval("upkeep()", 30);
@@ -63,11 +65,30 @@
 		
 		function upkeep() {
 			ctx.clearRect(0, 0, can.width, can.height);
-			posX -= keyStatus[1] ? speed : 0;
-			posX += keyStatus[3] ? speed : 0;
-			posY -= keyStatus[0] ? speed : 0;
-			posY += keyStatus[2] ? speed : 0;
+			doMovement();
 			drawPlayerAt(posX, posY);
+		}
+		
+		function doMovement() {
+			// This would be much easier with polar coordinates, but webdev has made go uuuuuhhhh at math
+			var dist = Math.sqrt((startX-posX)*(startX-posX) + (startY-posY)*(startY-posY));
+			var distX = startX - posX;
+			var distY = startY - posY;
+			var dx = 0;
+			var dy = 0;
+			
+			dx -= keyStatus[1] ? speed : 0;
+			dx += keyStatus[3] ? speed : 0;
+			dy -= keyStatus[0] ? speed : 0;
+			dy += keyStatus[2] ? speed : 0;
+			
+			if (dx != 0 && dy != 0) {
+				dy *= 0.7071067811;
+				dx *= 0.7071067811;
+			}
+			
+			posX += dx;
+			posY += dy;
 		}
 		
 		function drawPlayerAt(x, y) {
