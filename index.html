@@ -12,7 +12,21 @@
 	<script type="text/javascript">
 		var can = document.getElementById("screen");
 		var ctx = can.getContext("2d");
-		ctx.fillStyle = "#222244";
-		ctx.fillRect(200, 200, 100, 100);
+		var keepPlaying = true;
+		var posX = 0;
+		var posY = 0;
+		var poxZ = 0;
+		
+		var mainLoop = window.setInterval("upkeep()", 30);
+		
+		function upkeep() {
+			drawPlayerAt(posX, posY);
+			window.clearInterval(mainLoop);
+		}
+		
+		function drawPlayerAt(x, y) {
+			ctx.fillStyle = "#222244";
+			ctx.fillRect(x, y, 70, 70);
+		}
 	</script>
 </html>
