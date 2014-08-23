@@ -31,3 +31,87 @@ div[id=info] {
 	width: 25%;
 	height: 100%;
 }
+
+img[id=s1] {
+	position: absolute;
+	top: 150px;
+	left: 90px;
+	z-index: 1;
+}
+
+img[id=s2] {
+	position: absolute;
+	top: 85px;
+	left: 323px;
+	z-index: 1;
+}
+
+img[id=s3] {
+	position: absolute;
+	top: 136px;
+	left: 491px;
+	z-index: 1;
+}
+
+img[id=s4] {
+	position: absolute;
+	top: 217px;
+	left: 269px;
+	z-index: 1;
+}
+
+img[id=s5] {
+	position: absolute;
+	top: 335px;
+	left: 65px;
+	z-index: 1;
+}
+
+img[id=s6] {
+	position: absolute;
+	top: 348px;
+	left: 420px;
+	z-index: 1;
+}
+
+img[id=s7] {
+	position: absolute;
+	top: 323px;
+	left: 616px;
+	z-index: 1;
+}
+
+img[id=s8] {
+	position: absolute;
+	top: 575px;
+	left: 71px;
+	z-index: 1;
+}
+
+img[id=s9] {
+	position: absolute;
+	top: 524px;
+	left: 453px;
+	z-index: 1;
+}
+
+img[id=s10] {
+	position: absolute;
+	top: 456px;
+	left: 321px;
+	z-index: 1;
+}
+
+img[id=s11] {
+	position: absolute;
+	top: 686px;
+	left: 220px;
+	z-index: 1;
+}
+
+img[id=s12] {
+	position: absolute;
+	top: 694px;
+	left: 610px;
+	z-index: 1;
+}
