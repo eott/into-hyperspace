@@ -11,6 +11,16 @@ canvas[id=screen] {
 	border: 1px solid #000000;
 }
 
+div[id=mapView] {
+	width: 1000px;
+	height: 800px;
+}
+
+div[id=gameView] {
+	width: 1000px;
+	height: 800px;
+}
+
 div[id=mapWrapper] {
 	width: 1000px;
 	height: 800px;
