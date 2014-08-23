@@ -22,8 +22,9 @@
 		var speed = 10;
 		var startX = 500;
 		var startY = 400;
-		var posX = startX;
-		var posY = startY;
+		var colRad = 420;
+		var posX = 0;
+		var posY = 0;
 		var poxZ = 0;
 		var fc = 0;
 		var theta = 0;
@@ -79,25 +80,23 @@
 			doMovement();
 			drawGUI();
 			drawTunnel();
-			drawPlayerAt(posX, posY);
+			drawPlayerAt(posX + startX, posY + startY);
 			fc++;
 		}
 		
 		function doMovement() {
 			// This would be much easier with proper polar coordinates, but webdev has made me go uuuuuhhhh at math
-			r = Math.sqrt((startX-posX)*(startX-posX) + (startY-posY)*(startY-posY));
-			var distX = posX - startX;
-			var distY = posY - startY;
+			r = Math.sqrt(posX * posX + posY * posY);
 			var dx = 0;
 			var dy = 0;
 			
-			if (distY < 0) {
-				theta = -Math.atan2(distY, distX);
+			if (posY < 0) {
+				theta = -Math.atan2(posY, posX);
 			} else {
-				theta = PI + (PI - Math.atan2(distY, distX));
+				theta = PI + (PI - Math.atan2(posY, posX));
 			}
 			
-			if (r < 450) {
+			if (r < colRad) {
 				dx -= keyStatus[1] ? speed : 0;
 				dx += keyStatus[3] ? speed : 0;
 				dy -= keyStatus[0] ? speed : 0;
@@ -156,7 +155,7 @@
 			document.getElementById("posX").innerHTML = posX;
 			document.getElementById("posY").innerHTML = posY;
 			document.getElementById("theta").innerHTML = theta;
-			circle(startX, startY, 450, '#FF0000');
+			circle(startX, startY, colRad, '#FF0000');
 		}
 		
 		function drawPlayerAt(x, y) {
