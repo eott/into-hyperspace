@@ -19,13 +19,15 @@
 		var ctx = can.getContext("2d");
 		var keepPlaying = true;
 		var keyStatus = {};
+		var mobs = [];
 		var speed = 10;
+		var zspeed = 15;
 		var startX = 500;
 		var startY = 400;
 		var colRad = 420;
 		var posX = 0;
 		var posY = 0;
-		var poxZ = 0;
+		var posZ = 0;
 		var fc = 0;
 		var theta = 0;
 		var r = 0;
@@ -80,6 +82,7 @@
 			doMovement();
 			drawGUI();
 			drawTunnel();
+			drawMobs();
 			drawPlayerAt(posX + startX, posY + startY);
 			fc++;
 		}
@@ -132,10 +135,11 @@
 			
 			posX += dx;
 			posY += dy;
+			posZ += zspeed;
 		}
 		
 		function drawTunnel() {
-			var rad = 840 + 15 * (fc % 24);
+			var rad = 840 + zspeed * (fc % 24);
 			for (var i = 0; i < 30; i++) {
 				circle(startX, startY, rad, '#000000', 1);
 				rad *= 0.7;
@@ -151,6 +155,24 @@
 				ctx.fill();
 			} else {
 				ctx.stroke();
+			}
+		}
+		
+		function drawMobs() {
+			if (Math.random() < 0.05) {
+				mobs[mobs.length] = [Math.random() * 2 - 1, Math.random() * 2 - 1, posZ + 1000];
+			}
+			
+			ctx.fillStyle = "#22FFFF";
+			for (var i = 0; i < mobs.length; i++) {
+				if (mobs[i]) {
+				var factor = (1 - (mobs[i][2] - posZ) / 1000);
+					if (factor > 0.95) {
+						mobs[i] = false;
+					} else {
+						circle(startX + mobs[i][0] * 840 * factor, startY + mobs[i][1] * 840 * factor, 100 * factor, "", 1, true);
+					}
+				}
 			}
 		}
 		
