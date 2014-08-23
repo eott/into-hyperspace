@@ -5,22 +5,33 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 	</head>
 	<body>
-		FC: <span id="framecounter">0</span>
-		HP :  <span id="hp">0</span>
-		Theta: <span id="theta">0</span>
-		X: <span id="posX">0</span>
-		Y: <span id="posY">0</span>
-		<br/>
-		<canvas id="screen" width="1000" height="800" style="border: 1px solid #222222">
-		
-		</canvas>
+		<div id="mapView">
+			<button id="startMap" onclick="init()">Start Game</button>
+		</div> <!-- mapView -->
+		<div id="gameView" style="display: none;">
+			FC: <span id="framecounter">0</span>
+			HP :  <span id="hp">0</span>
+			Theta: <span id="theta">0</span>
+			X: <span id="posX">0</span>
+			Y: <span id="posY">0</span>
+			<br/>
+			<canvas id="screen" width="1000" height="800" style="border: 1px solid #222222"></canvas>
+		</div> <!-- gameView-->
 	</body>
 	<script type="text/javascript">
+		// Display and meta globals
 		var can = document.getElementById("screen");
 		var ctx = can.getContext("2d");
 		var keepPlaying = true;
-		var keyStatus = {};
+		var fc = 0;
+		var mainLoop = false;
+		
+		// Player, enemies and environment
 		var mobs = [];
+		var hp = 100;
+		
+		// Input and movement
+		var keyStatus = {};
 		var speed = 10;
 		var zspeed = 15;
 		var startX = 500;
@@ -29,55 +40,61 @@
 		var posX = 0;
 		var posY = 0;
 		var posZ = 0;
-		var hp = 100;
-		var fc = 0;
 		var theta = 0;
 		var r = 0;
+		
+		// Other
 		var PI = Math.PI
 		var PI2 = PI / 2;
 		var PI32 = 3 * PI / 2;
 		
-		var mainLoop = window.setInterval("upkeep()", 30);
+		function init(event) {
+			var gameView = document.getElementById("gameView").style.display = "block";
+			var mapView = document.getElementById("mapView").style.display = "none";
+			
+			mainLoop = window.setInterval("upkeep()", 30);
+			
+			window.addEventListener("keydown", function(event) {
+				switch (event.keyCode) {
+					case 87: // w
+						keyStatus[0] = true;
+						break;
+					
+					case 65: // a
+						keyStatus[1] = true;
+						break;
+						
+					case 83: // s
+						keyStatus[2] = true;
+						break;
+						
+					case 68: // d
+						keyStatus[3] = true;
+						break;
+				}
+			}, false);
+			
+			window.addEventListener("keyup", function(event) {
+				switch (event.keyCode) {
+					case 87: // w
+						keyStatus[0] = false;
+						break;
+					
+					case 65: // a
+						keyStatus[1] = false;
+						break;
+						
+					case 83: // s
+						keyStatus[2] = false;
+						break;
+						
+					case 68: // d
+						keyStatus[3] = false;
+						break;
+				}
+			}, false);
+		}
 		
-		window.addEventListener("keydown", function(event) {
-			switch (event.keyCode) {
-				case 87: // w
-					keyStatus[0] = true;
-					break;
-				
-				case 65: // a
-					keyStatus[1] = true;
-					break;
-					
-				case 83: // s
-					keyStatus[2] = true;
-					break;
-					
-				case 68: // d
-					keyStatus[3] = true;
-					break;
-			}
-		}, false);
-		
-		window.addEventListener("keyup", function(event) {
-			switch (event.keyCode) {
-				case 87: // w
-					keyStatus[0] = false;
-					break;
-				
-				case 65: // a
-					keyStatus[1] = false;
-					break;
-					
-				case 83: // s
-					keyStatus[2] = false;
-					break;
-					
-				case 68: // d
-					keyStatus[3] = false;
-					break;
-			}
-		}, false);
 		
 		function upkeep() {
 			ctx.clearRect(0, 0, can.width, can.height);
