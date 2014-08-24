@@ -54,6 +54,18 @@ img[class=inactive] {
 	opacity: 0.4;
 }
 
+img[id=hlblue] {
+	position: absolute;
+	z-index: 2;
+	display: none;
+}
+
+img[id=hlred] {
+	position: absolute;
+	z-index: 2;
+	display: none;
+}
+
 img[id=s1] {
 	position: absolute;
 	top: 150px;
