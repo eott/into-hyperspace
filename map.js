@@ -48,6 +48,8 @@ function initMap(event) {
 	// Set current
 	document.getElementById("s" + nr).className = "active current";
 	document.getElementById("current").innerHTML = nameNumberMap[nr];
+	
+	playSound("menu");
 }
 
 function selectWorld(event, nr) {
