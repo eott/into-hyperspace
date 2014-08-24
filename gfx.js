@@ -68,16 +68,16 @@ function drawPlayerAt(x, y) {
 	// Head up
 	ctx.beginPath();
 	ctx.moveTo(x - 50, y - 25);
-	ctx.lineTo(x - 40, y - 25 - (20 * paraY));
-	ctx.lineTo(x + 40, y - 25 - (20 * paraY));
+	ctx.lineTo(x - 40, y - 25 - (40 * paraY));
+	ctx.lineTo(x + 40, y - 25 - (40 * paraY));
 	ctx.lineTo(x + 50, y - 25);
 	ctx.closePath();
 	ctx.fill();
 	// Head down
 	ctx.beginPath();
 	ctx.moveTo(x - 50, y + 25);
-	ctx.lineTo(x - 40, y + 25 - (20 * paraY));
-	ctx.lineTo(x + 40, y + 25 - (20 * paraY));
+	ctx.lineTo(x - 40, y + 25 - (40 * paraY));
+	ctx.lineTo(x + 40, y + 25 - (40 * paraY));
 	ctx.lineTo(x + 50, y + 25);
 	ctx.closePath();
 	ctx.fill();
