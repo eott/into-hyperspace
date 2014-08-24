@@ -1,7 +1,7 @@
 function drawTunnel() {
 	var rad = 840 + zspeed * (fc % 24);
 	for (var i = 0; i < 30; i++) {
-		circle(startX, startY, rad, '#000000', 1);
+		circle(startX, startY, rad, '#000000', 1, false);
 		rad *= 0.7;
 	}
 }
@@ -26,7 +26,7 @@ function loadImage(name) {
 	return img;
 }
 
-function circle(x, y, radius, color, width, fill = false) {
+function circle(x, y, radius, color, width, fill) {
 	ctx.beginPath();
 	ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
 	ctx.lineWidth = width;
