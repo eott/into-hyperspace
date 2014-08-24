@@ -9,6 +9,8 @@ var fc = 0;
 // Player, enemies and environment
 var mobs = [];
 var hp = 100;
+var mission = false;
+var availableMissions = [];
 
 // Input and movement
 var keyStatus = {};

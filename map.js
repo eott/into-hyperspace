@@ -49,6 +49,15 @@ function initMap(event) {
 	document.getElementById("s" + nr).className = "active current";
 	document.getElementById("current").innerHTML = nameNumberMap[nr];
 	
+	// Create missions
+	createMissions();
+	document.getElementById("briefing").innerHTML = availableMissions[selectedWorld].briefing;
+	document.getElementById("reward").innerHTML = availableMissions[selectedWorld].reward;
+	document.getElementById("difficulty").innerHTML = availableMissions[selectedWorld].difficulty;
+	
+	// Preselect first world of connections, because we're lazy
+	selectWorld(false, connections[nr][0]);
+	
 	stopSound("game");
 	playSound("menu");
 }
@@ -61,6 +70,34 @@ function selectWorld(event, nr) {
 		}
 		document.getElementById("s" + nr).className = "active selected";
 	}
+}
+
+function createMissions() {
+	availableMissions = [];
+	for (var i = 0; i < connections[currentWorld].length; i++) {
+		var toWorld = nameNumberMap[connections[currentWorld][i]];
+		var diff = getDifficulty();
+		var newMission = {
+			"completed" : false,
+			"toWorld" : toWorld,
+			"briefing" : getBriefing(toWorld),
+			"reward" : getReward(diff),
+			"difficulty" : diff
+		}
+		availableMissions[connections[currentWorld][i]] = newMission;
+	}
+}
+
+function getBriefing(worldName) {
+	return "This is a brief test, tehe";
+}
+
+function getReward(difficulty) {
+	return difficulty * 100 + ((Math.random() - 1) * 100);
+}
+
+function getDifficulty() {
+	return Math.round((5 * Math.random() + 1));
 }
 
 function contains(a, obj) {
