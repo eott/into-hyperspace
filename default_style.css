@@ -44,16 +44,15 @@ div[id=mapWrapper] {
 div[id=map] {
 	background-color: #333333;
 	float: left;
-	width: 75%;
-	height: 100%;
+	width: 750px;
+	height: 800px;
 }
 
 div[id=info] {
 	background-color: #666666;
 	float: left;
-	width: 25%;
-	height: 100%;
-	padding: 60px 0px 0px 0px;
+	width: 250px;
+	height: 800px;
 }
 
 img[class=active] {
