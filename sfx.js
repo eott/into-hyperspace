@@ -4,6 +4,7 @@ initState = true; // Stupid, but fixes a bug where you cannot call functions on 
 function loadSounds() {
 	nameAudioMap["menu"] = new Audio("menu.mp3");
 	nameAudioMap["game"] = new Audio("game.mp3");
+	nameAudioMap["hit"] = new Audio("hit.mp3");
 }
 
 function playSound(name) {

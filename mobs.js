@@ -44,6 +44,7 @@ function drawMobs() {
 			if (factor > 0.98) {
 				if (Math.sqrt((mobX - posX - startX) * (mobX - posX - startX) + (mobY - posY - startY) * (mobY - posY - startY)) <= mobs[i]["dradius"]) {
 					hp -= mobs[i]["damage"];
+					playSound("hit");
 				}
 				mobs[i] = false;
 			} else {
