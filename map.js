@@ -118,7 +118,7 @@ function createMissions() {
 		var newMission = {
 			"completed" : false,
 			"toWorld" : toWorld,
-			"briefing" : getBriefing(toWorld),
+			"briefing" : getBriefing(nameNumberMap[toWorld]),
 			"reward" : getReward(diff),
 			"difficulty" : diff
 		}
