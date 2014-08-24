@@ -45,6 +45,16 @@ function drawMobs() {
 			}
 		}
 	}
+	
+	if (fc % 200) { // Every 200 frames, clean up the enemy list for faster iteration
+		newList = [];
+		for (var i = 0; i < mobs.length; i++) {
+			if (mobs[i]) {
+				newList[newList.length] = mobs[i];
+			}
+		}
+		mobs = newList;
+	}
 }
 
 function resetMobs() {
