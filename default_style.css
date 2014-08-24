@@ -53,6 +53,7 @@ div[id=info] {
 	float: left;
 	width: 25%;
 	height: 100%;
+	padding: 60px 0px 0px 0px;
 }
 
 img[class=active] {
