@@ -3,6 +3,33 @@ body {
 	font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
+span[id=current],
+span[id=toWorld],
+span[id=difficulty],
+span[id=reward],
+span[id=highscore] {
+	font-size: 25px;
+	margin-left: 20px;
+	vertical-align: top;
+}
+
+span[id=highscoreTitle] {
+	margin-left: 70px;
+	font-size: 28px;
+}
+
+span[id=briefing] {
+	font-size: 18px;
+}
+
+span[id=briefingTitle] {
+	font-size: 25px;
+}
+
+span[id=difficulty] {
+	margin-left: 25px;
+}
+
 canvas[id=screen] {
 	position: absolute;
 	top: 50%;
@@ -22,12 +49,14 @@ div[id=gameView] {
 	height: 800px;
 }
 
-span[id=startMap] {
-	width: 100px;
-	height: 25px;
+div[id=startMap] {
+	width: 220px;
+	height: 40px;
 	background-color: #CCCCCC;
-	border-radius: 4px;
+	border-radius: 7px;
 	border: 1px solid #444444;
+	font-size: 30px;
+	text-indent: 35px;
 }
 
 div[id=mapWrapper] {
@@ -51,8 +80,9 @@ div[id=map] {
 div[id=info] {
 	background-color: #666666;
 	float: left;
-	width: 250px;
-	height: 800px;
+	width: 220px;
+	height: 765px;
+	padding: 35px 15px 0px 15px;
 }
 
 img[class=active] {
