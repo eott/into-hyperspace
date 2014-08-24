@@ -98,7 +98,7 @@ function getBriefing(worldName) {
 }
 
 function getReward(difficulty) {
-	return difficulty * 100 + ((Math.random() - 1) * 100);
+	return Math.round(difficulty * 100 + ((Math.random() - 1) * 100));
 }
 
 function getDifficulty() {

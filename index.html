@@ -2,6 +2,7 @@
 	<head>
 		<title>What is, where what, what am I even?</title>
 		<link rel="stylesheet" type="text/css" href="default_style.css">
+		<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700' rel='stylesheet' type='text/css'>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 	</head>
 	
@@ -26,18 +27,18 @@
 					<img id="hlblue" src="hl_blue.png" width="76" height="79"/>
 				</div> <!-- map -->
 				<div id="info">
-					<span id="current">On world:</span>
+					On world: <span id="current"></span>
 					<br/>
-					<span id="toWorld">To world:</span>
+					To world: <span id="toWorld"></span>
 					<br/>
 					<div id="mission">
-						<span id="briefing">Do something!!1</span>
+						Briefing: <span id="briefing">Do something!!1</span>
 						<br>
-						<span id="reward">0</span>
-						<span id="difficulty"></span>
+						Reward: <span id="reward">0</span>
+						Difficulty: <span id="difficulty"></span>
 					</div> <!-- mission -->
 					<br/>
-					<button id="startMap" onclick="initGame()">Into Hyperspace!</button>
+					<span id="startMap" onclick="initGame()">Into Hyperspace!</span>
 					<br/>
 					<span id="status">You have not played yet.</span>
 				</div> <!-- info -->
