@@ -127,7 +127,7 @@ function createMissions() {
 }
 
 function getBriefing(worldName) {
-	switch (Math.floor(Math.random() * 6)) {
+	switch (Math.floor(Math.random() * 14)) {
 		case 0:
 			return "Please, brave freigther pilot, someone must save the people of " + worldName + "! They do not know of the words of our Prophet Yog-Sothoth and someone must deliver these books of holy text so their souls can be saved. Can you do this task?";
 		case 1:
@@ -140,6 +140,22 @@ function getBriefing(worldName) {
 			return "This is an automated job posting. User 'leanandmean' is looking for a pilot to bring the cargo of 'Big American Challenge' to the world " + worldName + ". User interested in this job are not required to meet the poster.";
 		case 5:
 			return "This is an automated job posting. User 'skynet0xF2FFBA4' is looking for a pilot to bring the cargo of '10000 CPUs, 50000 RAM-Boards, 1000 Steel-Casing, 1 Chainsaw' to the world " + worldName + ". Users interested in this job are illadvised to contact the poster.";
+		case 6:
+			return "This is an automated job posting. User 'geezer2045' is looking for a pilot with the following skills: Wood-fueled Freight Transporter, Toaster Maintenance. Users interested in this job may light a fire and signal the poster with smoke signals.";
+		case 7:
+			return "This is an automated job posting. User 'justthedoctor' is looking for a pilot with the following skills: All of them. Users interested in this job will be contacted by the poster.";
+		case 8:
+			return "This is an automated job posting. User 'principalLewis' is looking for a pilot to bring the cargo of '1 giant coocain bag' to the world " + worldName + ". Users interested in this job will me monitored by the ADA.";
+		case 9:
+			return "This is an automated job posting. User 'noyou' is looking for a pilot to bring the cargo of 'Yourself' to the world " + worldName + ". Users interested in this job can contact the poster under the following address: 127.0.0.1";
+		case 10:
+			return "This is an automated job posting. User 'Enter name' is looking for a pilot with the following skills: , to bring the cargo '' to the world " + worldName + ". Users interested in this job can contact the poster under the following address: Siri, google strawberry muffins real milk";
+		case 11:
+			return "This is an automated job posting. User 'dsadsadasd' is looking for a pilot to bring the cargo of 'dadasddasdas' to the world " + worldName + ". Users interested in this job should not take this seriously.";
+		case 12:
+			return "Good afternoon Gentlemen. Today this afternoon we intercepted a message from the underground gang The Wozniaks, who are planning an attack on their rivals, the Torvalds. Someone must bring this intel via snail mail to the world " + worldName + ", so it will be their problem. Who's volunteering? How about you?";
+		case 13:
+			return "This is a secret mission. The purpose of this mission is secret, the poster of this mission is secret and whoever takes on this mission must destroy this message within 5 seconds of reading. 5... 4... 3... 2... 1... DESTROY!";
 		default:
 			return "Uh, what? Oh, the mission? Sorry I can't be bothered right now. Just fly somewhere, I guess.";
 	}
