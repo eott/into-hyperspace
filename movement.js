@@ -51,6 +51,6 @@ function doMovement() {
 
 function resetMovement() {
 	posX = 0;
-	posY = 0;
+	posY = 100;
 	posZ = 0;
 }

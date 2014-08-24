@@ -20,7 +20,7 @@ var startX = 500;
 var startY = 400;
 var colRad = 420;
 var posX = 0;
-var posY = 0;
+var posY = 100;
 var posZ = 0;
 var theta = 0;
 var r = 0;
@@ -65,6 +65,11 @@ function upkeep() {
 		keepPlaying = false;
 		currentMission.completed = false;
 	}
+	if (fc > 1880) {
+		ctx.fillStyle = "rgba(255,255,255," + ((fc % 1880) / 90) + ")";
+		ctx.fillRect(0, 0, 1000, 800);
+	}
+	
 	if (fc > 2000) {
 		keepPlaying = false;
 		currentMission.completed = true;
