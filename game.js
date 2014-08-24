@@ -30,6 +30,7 @@ var PI32 = 3 * PI / 2;
 
 // Stuff that only needs to be done once
 registerListeners();
+initMap();
 
 function initGame(event) {
 	var gameView = document.getElementById("gameView").style.display = "block";

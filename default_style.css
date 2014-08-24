@@ -46,6 +46,14 @@ div[id=info] {
 	height: 100%;
 }
 
+img[class=active] {
+	opacity: 1.0;
+}
+
+img[class=inactive] {
+	opacity: 0.4;
+}
+
 img[id=s1] {
 	position: absolute;
 	top: 150px;
