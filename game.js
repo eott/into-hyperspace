@@ -14,7 +14,7 @@ var availableMissions = [];
 
 // Input and movement
 var keyStatus = {};
-var speed = 10;
+var speed = 6;
 var zspeed = 15;
 var startX = 500;
 var startY = 400;

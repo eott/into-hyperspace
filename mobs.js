@@ -20,7 +20,7 @@ function drawMobs() {
 			"type" : "asteroid",
 			"image" : getRandomImage("asteroid")
 		};
-	} else if(rand < 0.14) {
+	} else if(rand < 0.26) {
 		randX = randWeighted(posX / (colRad +  200));
 		randY = randWeighted(posY / (colRad +  200));
 		mobs[mobs.length] = {

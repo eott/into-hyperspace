@@ -39,14 +39,6 @@ function circle(x, y, radius, color, width, fill = false) {
 }
 
 function drawGUI() {
-	// Debug gui
-	document.getElementById("framecounter").innerHTML = fc;
-	document.getElementById("posX").innerHTML = posX;
-	document.getElementById("posY").innerHTML = posY;
-	document.getElementById("theta").innerHTML = theta;
-	document.getElementById("hp").innerHTML = hp;
-	circle(startX, startY, colRad, '#FF0000', 1);
-	
 	// HP bar
 	ctx.fillStyle = "#000000";
 	ctx.fillRect(200, 750, 600, 25, "#000000");
