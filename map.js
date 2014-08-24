@@ -102,6 +102,9 @@ function getReward(difficulty) {
 }
 
 function getDifficulty() {
+	if (Math.random() < 0.01) {
+		return 15; // This is totally not an easter egg, stop looking through the source!
+	}
 	return Math.round((5 * Math.random() + 1));
 }
 
