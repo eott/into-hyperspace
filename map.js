@@ -49,6 +49,7 @@ function initMap(event) {
 	document.getElementById("s" + nr).className = "active current";
 	document.getElementById("current").innerHTML = nameNumberMap[nr];
 	
+	stopSound("game");
 	playSound("menu");
 }
 

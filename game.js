@@ -44,6 +44,9 @@ function initGame(event) {
 	resetMobs();
 	resetMovement();
 	
+	stopSound("menu");
+	playSound("game");
+	
 	mainLoop = window.setInterval("upkeep()", 30);
 }
 
