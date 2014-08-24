@@ -28,6 +28,21 @@ var connections = {
 	12: [11, 9, 7]
 };
 
+var hlPositions = { // This is really f***ing stupid and should be better done with css, but as all webware, css is a piece of... 
+	1: ["130", "73"],
+	2: ["69", "306"],
+	3: ["123", "470"],
+	4: ["205", "257"],
+	5: ["326", "55"],
+	6: ["337", "399"],
+	7: ["305", "605"],
+	8: ["565", "55"],
+	9: ["516", "434"],
+	10: ["441", "308"],
+	11: ["670", "211"],
+	12: ["686", "595"]
+};
+
 var selectedWorld = 9;
 var currentWorld = 10;
 
@@ -61,6 +76,12 @@ function initMap(event) {
 	// Preselect first world of connections, because we're lazy
 	selectWorld(false, connections[nr][0]);
 	
+	// Put red highlight on current world	
+	var elementHl = document.getElementById("hlred");
+	elementHl.style.top = hlPositions[nr][0];
+	elementHl.style.left = hlPositions[nr][1];
+	elementHl.style.display = "block";
+
 	stopSound("game");
 	playSound("menu");
 }
@@ -74,7 +95,12 @@ function selectWorld(event, nr) {
 		for (var i = 0; i < connections[currentWorld].length; i++) {
 			var element = document.getElementById("s" + connections[currentWorld][i]).className = "active";
 		}
-		document.getElementById("s" + nr).className = "active selected";
+		var elementSelect = document.getElementById("s" + nr)
+		elementSelect.className = "active selected";
+		var elementHl = document.getElementById("hlblue");
+		elementHl.style.top = hlPositions[nr][0];
+		elementHl.style.left = hlPositions[nr][1];
+		elementHl.style.display = "block";
 		
 		// Select mission
 		currentMission = availableMissions[nr];
