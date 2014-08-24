@@ -101,6 +101,22 @@ function createMissions() {
 }
 
 function getBriefing(worldName) {
+	switch (Math.floor(Math.random() * 6)) {
+		case 0:
+			return "Please, brave freigther pilot, someone must save the people of " + worldName + "! They do not know of the words of our Prophet Yog-Sothoth and someone must deliver these books of holy text so their souls can be saved. Can you do this task?";
+		case 1:
+			return "Attention, maggot! Someone deemed you important enough to give you a mission and I'll be damned if you screw this up! So go out there and give me 100. 100%, that is!";
+		case 2:
+			return "Welcome dear Customer #3984482342. You have been randomly selected to improve our customer experience. We are experimenting with an exciting new mechanism of content delivery. If you want to participate in this experiment, just say nothing. If you don't want to, just press the ignore button. What's that, there's no such button? Haha, you fool fell for it!";
+		case 3:
+			return "This is an automated job posting. User 'sillykitten2103' is looking for a pilot with the following skills: Small Freight Transporter, Capital Freight Transporter, Discrete Taxi Vehicle and Advanced Lovemaking. Users interested in this job may contact the poster under the given address: sillykitten2103@trash-mail.com";
+		case 4:
+			return "This is an automated job posting. User 'leanandmean' is looking for a pilot to bring the cargo of 'Big American Challenge' to the world " + worldName + ". User interested in this job are not required to meet the poster.";
+		case 5:
+			return "This is an automated job posting. User 'skynet0xF2FFBA4' is looking for a pilot to bring the cargo of '10000 CPUs, 50000 RAM-Boards, 1000 Steel-Casing, 1 Chainsaw' to the world " + worldName + ". Users interested in this job are illadvised to contact the poster.";
+		default:
+			return "Uh, what? Oh, the mission? Sorry I can't be bothered right now. Just fly somewhere, I guess.";
+	}
 	return "This is a brief test, tehe";
 }
 
