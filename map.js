@@ -49,11 +49,7 @@ function initMap(event) {
 	document.getElementById("s" + nr).className = "active current";
 	document.getElementById("current").innerHTML = nameNumberMap[nr];
 	
-	// Create missions
 	createMissions();
-	document.getElementById("briefing").innerHTML = availableMissions[selectedWorld].briefing;
-	document.getElementById("reward").innerHTML = availableMissions[selectedWorld].reward;
-	document.getElementById("difficulty").innerHTML = availableMissions[selectedWorld].difficulty;
 	
 	// Preselect first world of connections, because we're lazy
 	selectWorld(false, connections[nr][0]);
@@ -64,11 +60,20 @@ function initMap(event) {
 
 function selectWorld(event, nr) {
 	if (contains(connections[currentWorld], nr) && nr != currentWorld) {
+		selectedWorld = nr;
+	
+		// Set classes for highlighting
 		document.getElementById("toWorld").innerHTML = nameNumberMap[nr];
 		for (var i = 0; i < connections[currentWorld].length; i++) {
 			var element = document.getElementById("s" + connections[currentWorld][i]).className = "active";
 		}
 		document.getElementById("s" + nr).className = "active selected";
+		
+		// Select mission
+		currentMission = availableMissions[nr];
+		document.getElementById("briefing").innerHTML = currentMission.briefing;
+		document.getElementById("reward").innerHTML = currentMission.reward;
+		document.getElementById("difficulty").innerHTML = currentMission.difficulty;
 	}
 }
 
