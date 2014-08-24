@@ -1,3 +1,12 @@
+imagesByName = {
+	"asteroid1" : loadImage("asteroid1"),
+	"asteroid2" : loadImage("asteroid2"),
+	"asteroid3" : loadImage("asteroid3"),
+	"asteroid4" : loadImage("asteroid4"),
+	"asteroid5" : loadImage("asteroid5"),
+	"plasma" : loadImage("plasma")
+};
+
 function drawMobs() {
 	var rand = Math.random()
 	if (rand < 0.04) {
@@ -8,7 +17,8 @@ function drawMobs() {
 			"radius": 100,
 			"dradius" : 100,
 			"damage" : 10,
-			"type" : "asteroid"
+			"type" : "asteroid",
+			"image" : getRandomImage("asteroid")
 		};
 	} else if(rand < 0.14) {
 		randX = randWeighted(posX / (colRad +  200));
@@ -20,7 +30,8 @@ function drawMobs() {
 			"radius": 25,
 			"dradius": 50,
 			"damage" : 5,
-			"type" : "plasma"
+			"type" : "plasma",
+			"image" : "plasma"
 		};
 	}
 	
@@ -36,12 +47,8 @@ function drawMobs() {
 				}
 				mobs[i] = false;
 			} else {
-				if (mobs[i]["type"] == "asteroid") {
-					ctx.fillStyle = "#22FFFF";
-				} else {
-					ctx.fillStyle = "#FF0000";
-				}
-				circle(mobX, mobY, mobR, "", 1, true);
+				var img = imagesByName[mobs[i]["image"]];
+				ctx.drawImage(img, mobX, mobY, img.width * factor, img.height * factor);
 			}
 		}
 	}
@@ -59,6 +66,10 @@ function drawMobs() {
 
 function resetMobs() {
 	mobs = [];
+}
+
+function getRandomImage(type) {
+	return "asteroid" + (Math.round(Math.random() * 4) + 1);
 }
 
 function randWeighted(mean) {

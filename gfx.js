@@ -6,6 +6,26 @@ function drawTunnel() {
 	}
 }
 
+function loadImage(name) {
+	var img = new Image();
+	switch (name) {
+		case "asteroid1":
+		case "asteroid2":
+		case "asteroid3":
+		case "asteroid4":
+		case "asteroid5":
+			img.width = 200;
+			img.height = 200;
+			break;
+		case "plasma":
+			img.width = 50;
+			img.height = 50;
+			break;
+	}
+	img.src = name + ".png";
+	return img;
+}
+
 function circle(x, y, radius, color, width, fill = false) {
 	ctx.beginPath();
 	ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
