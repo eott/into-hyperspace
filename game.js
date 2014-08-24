@@ -3,12 +3,12 @@ var can = document.getElementById("screen");
 var ctx = can.getContext("2d");
 var keepPlaying = true;
 var mainLoop = false;
-var completed = false;
 var fc = 0;
 
 // Player, enemies and environment
 var mobs = [];
 var hp = 100;
+var highscore = 0;
 var currentMission = false;
 var availableMissions = [];
 
@@ -39,7 +39,6 @@ function initGame(event) {
 	var gameView = document.getElementById("gameView").style.display = "block";
 	var mapView = document.getElementById("mapView").style.display = "none";
 	
-	completed = false;
 	keepPlaying = true;
 	hp = 100;
 	fc = 0;
@@ -64,11 +63,11 @@ function upkeep() {
 	
 	if (hp <= 0) {
 		keepPlaying = false;
-		completed = false;
+		currentMission.completed = false;
 	}
 	if (fc > 2000) {
 		keepPlaying = false;
-		completed = true;
+		currentMission.completed = true;
 	}
 	
 	if (!keepPlaying) {

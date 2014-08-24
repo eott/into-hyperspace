@@ -34,7 +34,14 @@ var currentWorld = 10;
 function initMap(event) {
 	var gameView = document.getElementById("gameView").style.display = "none";
 	var mapView = document.getElementById("mapView").style.display = "block";
-	document.getElementById("status").innerHTML = "You have " + (completed ? "won" : "lost") + " the last round.";
+	
+	if (currentMission) {
+		if (currentMission.completed) {
+			highscore += currentMission.reward;
+			document.getElementById("highscore").innerHTML = highscore;
+			currentWorld = currentMission.toWorld;
+		}
+	}
 	
 	var nr = currentWorld;
 	// Set all inactive
@@ -80,7 +87,7 @@ function selectWorld(event, nr) {
 function createMissions() {
 	availableMissions = [];
 	for (var i = 0; i < connections[currentWorld].length; i++) {
-		var toWorld = nameNumberMap[connections[currentWorld][i]];
+		var toWorld = connections[currentWorld][i];
 		var diff = getDifficulty();
 		var newMission = {
 			"completed" : false,
