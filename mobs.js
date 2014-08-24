@@ -9,18 +9,18 @@ imagesByName = {
 
 function drawMobs() {
 	var rand = Math.random()
-	if (rand < 0.04) {
+	if (rand < (0.04 + 0.01 * currentMission["difficulty"])) {
 		mobs[mobs.length] = {
 			"x": Math.random() * 2 - 1, 
 			"y": Math.random() * 2 - 1,
 			"z": posZ + 1000,
 			"radius": 100,
 			"dradius" : 100,
-			"damage" : 10,
+			"damage" : 10 + currentMission["difficulty"],
 			"type" : "asteroid",
 			"image" : getRandomImage("asteroid")
 		};
-	} else if(rand < 0.26) {
+	} else if(rand < (0.21 + 0.02 * currentMission["difficulty"])) {
 		randX = randWeighted(posX / (colRad +  200));
 		randY = randWeighted(posY / (colRad +  200));
 		mobs[mobs.length] = {
@@ -28,8 +28,8 @@ function drawMobs() {
 			"y": randY, 
 			"z": posZ + 1000,
 			"radius": 25,
-			"dradius": 50,
-			"damage" : 5,
+			"dradius": 50 + 2 * currentMission["difficulty"],
+			"damage" : 5 + 2 * currentMission["difficulty"],
 			"type" : "plasma",
 			"image" : "plasma"
 		};
