@@ -1,0 +1,190 @@
+body {
+	background-color: #AAAAAA;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+span[id=current],
+span[id=toWorld],
+span[id=difficulty],
+span[id=reward],
+span[id=highscore] {
+	font-size: 25px;
+	margin-left: 20px;
+	vertical-align: top;
+}
+
+span[id=highscoreTitle] {
+	margin-left: 70px;
+	font-size: 28px;
+}
+
+span[id=briefing] {
+	font-size: 18px;
+}
+
+span[id=briefingTitle] {
+	font-size: 25px;
+}
+
+span[id=difficulty] {
+	margin-left: 25px;
+}
+
+canvas[id=screen] {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -400px;
+	margin-left: -500px;
+	border: 1px solid #000000;
+}
+
+div[id=mapView] {
+	width: 1000px;
+	height: 800px;
+}
+
+div[id=gameView] {
+	width: 1000px;
+	height: 800px;
+}
+
+div[id=startMap] {
+	width: 220px;
+	height: 40px;
+	background-color: #CCCCCC;
+	border-radius: 7px;
+	border: 1px solid #444444;
+	font-size: 30px;
+	text-indent: 35px;
+}
+
+div[id=mapWrapper] {
+	width: 1000px;
+	height: 800px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -400px;
+	margin-left: -500px;
+	border: 1px solid #000000;
+}
+
+div[id=map] {
+	background-color: #333333;
+	float: left;
+	width: 750px;
+	height: 800px;
+}
+
+div[id=info] {
+	background-color: #666666;
+	float: left;
+	width: 220px;
+	height: 765px;
+	padding: 35px 15px 0px 15px;
+}
+
+img[class=active] {
+	opacity: 1.0;
+}
+
+img[class=inactive] {
+	opacity: 0.4;
+}
+
+img[id=hlblue] {
+	position: absolute;
+	z-index: 2;
+	display: none;
+}
+
+img[id=hlred] {
+	position: absolute;
+	z-index: 2;
+	display: none;
+}
+
+img[id=s1] {
+	position: absolute;
+	top: 150px;
+	left: 90px;
+	z-index: 1;
+}
+
+img[id=s2] {
+	position: absolute;
+	top: 85px;
+	left: 323px;
+	z-index: 1;
+}
+
+img[id=s3] {
+	position: absolute;
+	top: 136px;
+	left: 491px;
+	z-index: 1;
+}
+
+img[id=s4] {
+	position: absolute;
+	top: 217px;
+	left: 269px;
+	z-index: 1;
+}
+
+img[id=s5] {
+	position: absolute;
+	top: 335px;
+	left: 65px;
+	z-index: 1;
+}
+
+img[id=s6] {
+	position: absolute;
+	top: 348px;
+	left: 420px;
+	z-index: 1;
+}
+
+img[id=s7] {
+	position: absolute;
+	top: 323px;
+	left: 616px;
+	z-index: 1;
+}
+
+img[id=s8] {
+	position: absolute;
+	top: 575px;
+	left: 71px;
+	z-index: 1;
+}
+
+img[id=s9] {
+	position: absolute;
+	top: 524px;
+	left: 453px;
+	z-index: 1;
+}
+
+img[id=s10] {
+	position: absolute;
+	top: 456px;
+	left: 321px;
+	z-index: 1;
+}
+
+img[id=s11] {
+	position: absolute;
+	top: 686px;
+	left: 220px;
+	z-index: 1;
+}
+
+img[id=s12] {
+	position: absolute;
+	top: 694px;
+	left: 610px;
+	z-index: 1;
+}
